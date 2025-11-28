@@ -1,0 +1,69 @@
+مسیر استاندارد کار اینه:
+ـــ اول بزن:
+
+mkdir my-app
+cd my-app
+npm init -y
+ـــ بعد:
+
+npm install express
+npm install -D typescript ts-node nodemon @types/node @types/express
+ـــ بعد:
+
+npx tsc --init
+داخل tsconfig.json معمولی و بی‌دردسر اینارو میذارن:
+
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "CommonJS",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true
+  }
+}
+می‌بینی؟ نه esnext عجیب، نه moduleResolution عجق‌وجق.
+دنیای dev اینجا chillـه.
+ـــ بعد structure پروژه میشه اینجوری:
+
+project/
+  src/
+    index.ts
+  package.json
+  tsconfig.json
+داخل index.ts:
+
+import express from "express";
+const app = express();
+app.get("/", (req, res) => {
+  res.send("hello TS + express");
+});
+app.listen(3000, () => {
+  console.log("server running on 3000");
+});
+ـــ بعد داخل package.json اینو میذارن:
+
+"scripts": {
+  "dev": "nodemon --watch src --exec ts-node src/index.ts",
+  "build": "tsc",
+  "start": "node dist/index.js"
+}
+حالا بزن:
+
+npm run dev
+و تموم. سایتت با TypeScript بالا میاد و nodemon کانال می‌کشه روش.
+
+حالا اگه بخوای یه چیزی بزنی و خودش پروژه رو آماده کنه؟
+بزن اینو:
+
+npx express-generator-typescript my-app
+این literally برات یه پروژه کامل TS + express می‌سازه
+با ساختار درست، بهترین تنظیمات و آماده‌ی کار.
+
+جمع‌بندی سریعِ خودمونی:
+تو داشتی از مدرن‌ترین و esnext‌ترین تنظیمات استفاده می‌کردی که Node هنوز باهاش هر روز خوشحال نیست.
+تو دنیای واقعی dev، اکثر پروژه‌های express+TS با CommonJS و ES2020 استارت می‌خورن
+و کار به‌طرز آرامش‌بخشی درست انجام میشه.
+ادامه مسیر؟ وقتی راضی شدی که core پروژه بالا اومد، بعداً می‌ریم سمت ES modules واقعی یا bun یا tsup یا هفت‌خط دیگه، ولی پایه کار همیشه باید همین صاف و خفن شروع بشه.
