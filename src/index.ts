@@ -1,6 +1,10 @@
 import express from 'express'
 import { Request , Response , NextFunction } from "express";
 import cors from 'cors'
+import usersController from './users/usersControllers';
+
+
+
 
 
 const app = express()
@@ -11,28 +15,28 @@ app.use(cors())
 app.use(express.json())
 
 
-const AuthMiddleware = (req: Request , res: Response , next :NextFunction)=>{
 
-    if (req.body.role && req.body.role === "admin" ) {
-        
-        next()
 
-    }else{
 
-        res.status(401).send("Unathorized")
 
-    }
-    
-}
+app.get('/m' ,(req:Request , res:Response)=>{
+  res.send('khodaya shokret')
+})
 
 
 
 
 
-app.post("/users", AuthMiddleware , (req : Request, res : Response) => {
-    console.log(req.body);
-  res.send("user added");
-});
+app.use("/users", usersController);
+
+
+
+
+
+
+
+
+
 
 
 

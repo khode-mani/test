@@ -1,0 +1,1 @@
+import authMiddleware from './authMiddleware';

@@ -1,0 +1,13 @@
+CRUD ====> Create , Read , Update , Delete
+|
+|
+|
+|=> Create => Post
+|=> Read => Get
+|=> Update => Put
+|=> Delete => Delete
+
+
+------------------------------------------------------
+
+DTO ========> Data Type Object
